@@ -1,0 +1,2 @@
+a=`cat ./andy.txt | tail -n 1| sed 's/://g'`  
+  

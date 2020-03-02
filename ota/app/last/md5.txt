@@ -1,0 +1,3 @@
+f905a141da0a045a79e92ace47e576ad  update.sh
+5a8317fc1e2d65c652a7dc96c732c206  zrt_sta_app
+f59c359c424eb54ba45f54da120f0f1b  zrt_sta_daemon

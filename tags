@@ -1,0 +1,54 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+COLOR_BLUE	andy.c	9;"	d	file:
+COLOR_GREEN	andy.c	8;"	d	file:
+COLOR_RED	andy.c	7;"	d	file:
+KERNELDIR	Makefile	/^KERNELDIR=\/home\/linux\/kernel\/kernel$/;"	m
+PWD	Makefile	/^PWD=$(shell pwd)$/;"	m
+__this_module	pwm-jz.mod.c	/^struct module __this_module$/;"	v	typeref:struct:module
+__used	pwm-jz.mod.c	/^__used$/;"	v	file:
+cell	pwm-jz.c	/^	const struct mfd_cell *cell;$/;"	m	struct:jz_pwm_chip	typeref:struct:jz_pwm_chip::mfd_cell	file:	access:public
+chip	pwm-jz.c	/^	struct pwm_chip chip;$/;"	m	struct:jz_pwm_chip	typeref:struct:jz_pwm_chip::pwm_chip	file:	access:public
+dev	pwm-jz.c	/^	struct device *dev;$/;"	m	struct:jz_pwm_chip	typeref:struct:jz_pwm_chip::device	file:	access:public
+fb32	andy.c	/^int *fb32 = NULL;  $/;"	v
+fbfix	andy.c	/^struct fb_fix_screeninfo fbfix = { 0 };  $/;"	v	typeref:struct:fb_fix_screeninfo
+fbvar	andy.c	/^struct fb_var_screeninfo fbvar = { 0 };  $/;"	v	typeref:struct:fb_var_screeninfo
+fdfb	andy.c	/^int fdfb = -1;  $/;"	v
+id	pwm-jz.c	/^	short id;$/;"	m	struct:jz_pwm_device	file:	access:public
+jz_pwm_chip	pwm-jz.c	/^struct jz_pwm_chip {$/;"	s	file:
+jz_pwm_chip::cell	pwm-jz.c	/^	const struct mfd_cell *cell;$/;"	m	struct:jz_pwm_chip	typeref:struct:jz_pwm_chip::mfd_cell	file:	access:public
+jz_pwm_chip::chip	pwm-jz.c	/^	struct pwm_chip chip;$/;"	m	struct:jz_pwm_chip	typeref:struct:jz_pwm_chip::pwm_chip	file:	access:public
+jz_pwm_chip::dev	pwm-jz.c	/^	struct device *dev;$/;"	m	struct:jz_pwm_chip	typeref:struct:jz_pwm_chip::device	file:	access:public
+jz_pwm_chip::pwm_chrs	pwm-jz.c	/^	struct jz_pwm_device *pwm_chrs;$/;"	m	struct:jz_pwm_chip	typeref:struct:jz_pwm_chip::jz_pwm_device	file:	access:public
+jz_pwm_config	pwm-jz.c	/^static int jz_pwm_config(struct pwm_chip *chip, struct pwm_device *pwm,$/;"	f	file:	signature:(struct pwm_chip *chip, struct pwm_device *pwm, int duty_ns, int period_ns)
+jz_pwm_device	pwm-jz.c	/^struct jz_pwm_device{$/;"	s	file:
+jz_pwm_device::id	pwm-jz.c	/^	short id;$/;"	m	struct:jz_pwm_device	file:	access:public
+jz_pwm_device::label	pwm-jz.c	/^	const char *label;$/;"	m	struct:jz_pwm_device	file:	access:public
+jz_pwm_device::tcu_cha	pwm-jz.c	/^	struct jz_tcu_chn *tcu_cha;$/;"	m	struct:jz_pwm_device	typeref:struct:jz_pwm_device::jz_tcu_chn	file:	access:public
+jz_pwm_disable	pwm-jz.c	/^static void jz_pwm_disable(struct pwm_chip *chip, struct pwm_device *pwm)$/;"	f	file:	signature:(struct pwm_chip *chip, struct pwm_device *pwm)
+jz_pwm_driver	pwm-jz.c	/^module_platform_driver(jz_pwm_driver);$/;"	v
+jz_pwm_driver	pwm-jz.c	/^static struct platform_driver jz_pwm_driver = {$/;"	v	typeref:struct:platform_driver	file:
+jz_pwm_enable	pwm-jz.c	/^static int jz_pwm_enable(struct pwm_chip *chip, struct pwm_device *pwm)$/;"	f	file:	signature:(struct pwm_chip *chip, struct pwm_device *pwm)
+jz_pwm_free	pwm-jz.c	/^static void jz_pwm_free(struct pwm_chip *chip, struct pwm_device *pwm)$/;"	f	file:	signature:(struct pwm_chip *chip, struct pwm_device *pwm)
+jz_pwm_ops	pwm-jz.c	/^static const struct pwm_ops jz_pwm_ops = {$/;"	v	typeref:struct:pwm_ops	file:
+jz_pwm_probe	pwm-jz.c	/^static int jz_pwm_probe(struct platform_device *pdev)$/;"	f	file:	signature:(struct platform_device *pdev)
+jz_pwm_remove	pwm-jz.c	/^static int jz_pwm_remove(struct platform_device *pdev)$/;"	f	file:	signature:(struct platform_device *pdev)
+jz_pwm_request	pwm-jz.c	/^static int jz_pwm_request(struct pwm_chip *chip, struct pwm_device *pwm)$/;"	f	file:	signature:(struct pwm_chip *chip, struct pwm_device *pwm)
+jz_pwm_set_polarity	pwm-jz.c	/^int jz_pwm_set_polarity(struct pwm_chip *chip,struct pwm_device *pwm, enum pwm_polarity polarity)$/;"	f	signature:(struct pwm_chip *chip,struct pwm_device *pwm, enum pwm_polarity polarity)
+label	pwm-jz.c	/^	const char *label;$/;"	m	struct:jz_pwm_device	file:	access:public
+location	andy.c	/^long location = 0;  $/;"	v
+main	andy.c	/^int main(int argc, const char *argv[])$/;"	f	signature:(int argc, const char *argv[])
+main	test/code1.c	/^int main(int argc, const char *argv[])$/;"	f	signature:(int argc, const char *argv[])
+myadd	test/andy.c	/^static int myadd(int a ,int b)$/;"	f	file:	signature:(int a ,int b)
+myprob	test/andy.c	/^int myprob(int a, int b)$/;"	f	signature:(int a, int b)
+myprob	test/code1.c	/^extern myprob(int a ,int b);$/;"	p	file:	signature:(int a ,int b)
+pwm_chrs	pwm-jz.c	/^	struct jz_pwm_device *pwm_chrs;$/;"	m	struct:jz_pwm_chip	typeref:struct:jz_pwm_chip::jz_pwm_device	file:	access:public
+screensize	andy.c	/^long screensize = 0;  $/;"	v
+tcu_cha	pwm-jz.c	/^	struct jz_tcu_chn *tcu_cha;$/;"	m	struct:jz_pwm_device	typeref:struct:jz_pwm_device::jz_tcu_chn	file:	access:public
+to_jz	pwm-jz.c	/^static inline struct jz_pwm_chip *to_jz(struct pwm_chip *chip)$/;"	f	file:	signature:(struct pwm_chip *chip)
+x	andy.c	/^int x = 0;  $/;"	v
+y	andy.c	/^int y = 0;  $/;"	v

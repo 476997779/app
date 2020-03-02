@@ -1,0 +1,124 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/types.h>
+#include <fcntl.h>
+#include <sys/socket.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
+#include <sys/ioctl.h>
+#include <linux/if.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <sys/select.h>
+#include <signal.h>
+#include <pthread.h>
+
+int set_ssid_and_key(char *ssid,char *key)
+{
+#define net_name "eth1"
+	int ret;
+	int fd;
+	int i = 0;
+	char new_ssid[20] = {0};
+	char new_key[20] = {0};
+
+	int skfd = 0;
+	struct ifreq ifr;
+
+	FILE *fh = NULL;
+	FILE *fg = NULL;
+
+	int ssid_num; 
+	int key_num;
+	system("/bin/rm /wds_repeater/ssid_and_key.txt");
+
+	if((fd = open("/wds_repeater/ssid_and_key.txt", O_RDWR | O_CREAT | O_APPEND, 0666)) < 0)
+	{
+		printf("fail to open config\n");
+		return -1;
+	}
+
+
+	snprintf(new_ssid,1024,"\'%s\'",ssid); 
+	snprintf(new_key,1024,"\'%s\'",key); 
+	ssid_num = strlen(new_ssid);
+	key_num = strlen(new_key);
+
+	printf("new_ssid %s\n",new_ssid);	
+	printf("new_key %s\n",new_key);	
+	printf("ssid_num %d\n",ssid_num);	
+	printf("key_num %d\n",key_num);	
+
+	write(fd,new_ssid,ssid_num);
+	write(fd,"\r\n",2);
+	write(fd,new_key, key_num);
+
+	close(fd);
+
+	fh = popen("/bin/rm /wds_repeater/wds/wireless","r");
+	usleep(300000);
+	fh = popen("/bin/cp /wds_repeater/wds/wireless.bak /wds_repeater/wds/wireless","r");
+	usleep(300000);
+	fh = popen("echo option ssid `cat /wds_repeater/ssid_and_key.txt | sed -n '1p'` >> /wds_repeater/wds/wireless","r");
+	usleep(300000);
+	fh = popen("echo option key `cat /wds_repeater/ssid_and_key.txt | sed -n '2p'` >> /wds_repeater/wds/wireless","r");
+	usleep(300000);
+	system("/bin/echo config wifi-iface >> /wds_repeater/wds/wireless");
+	system("/bin/echo option device 'radio0' >> /wds_repeater/wds/wireless");
+	system("/bin/echo option ifname 'wlan0-guest' >> /wds_repeater/wds/wireless");
+	system("/bin/echo option network 'guest' >> /wds_repeater/wds/wireless");
+	system("/bin/echo option mode 'ap' >> /wds_repeater/wds/wireless");
+	system("/bin/echo option encryption 'psk2+ccmp' >> /wds_repeater/wds/wireless");
+	system("/bin/echo option disabled '0' >> /wds_repeater/wds/wireless");
+	system("/bin/sed -i 's/option hidden '0'/option hidden '1'/' /wds_repeater/wds/wireless");
+	fh = popen("echo option ssid `cat /wds_repeater/ssid_and_key.txt | sed -n '1p'` >> /wds_repeater/wds/wireless","r");
+	usleep(200000);
+	fh = popen("echo option key `cat /wds_repeater/ssid_and_key.txt | sed -n '2p'` >> /wds_repeater/wds/wireless","r");
+	usleep(200000);
+
+
+	pclose(fh);
+	/**/
+
+	skfd = socket(AF_INET, SOCK_DGRAM, 0);
+	if(skfd < 0){
+		printf("%s:%d Open socket error!\n", __FILE__, __LINE__);
+		return -1;
+	}
+	strcpy(ifr.ifr_name, net_name);
+
+	if(ioctl(skfd, SIOCGIFFLAGS, &ifr) <0 ){
+		printf("%s:%d IOCTL error!\n", __FILE__, __LINE__);
+		printf("Maybe ethernet inferface %s is not valid!", ifr.ifr_name);
+		close(skfd);
+		return -1;
+	}
+	if(ifr.ifr_flags & IFF_RUNNING){
+		//fg = popen("/bin/cp /wds_repeater/wds/* /etc/config","r");
+		//usleep(1000000);
+		//system("/sbin/wifi");
+		//pclose(fg);
+		fg = popen("/sbin/ifconfig eth1 down","r");
+		usleep(300000);//0.3s
+		pclose(fg);
+		close(skfd);
+	}
+	else{    
+		fg = popen("/bin/cp /wds_repeater/wds/wireless /etc/config","r");
+		usleep(500000);
+		system("/sbin/wifi");
+		pclose(fg);
+		close(skfd);
+	}
+	
+}
+
+int main(int argc, const char *argv[])
+{
+	set_ssid_and_key("wanyee","#wanyee*123");
+	return 0;
+}
+
+
